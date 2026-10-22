@@ -1,6 +1,7 @@
 BSD Zero Clause License
+=======================
 
-Copyright (C) 2026 Kelvin Chin
+_Copyright (C) 2026 Kelvin Chin_
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted.
