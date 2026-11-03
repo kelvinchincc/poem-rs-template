@@ -73,6 +73,11 @@ This runs `watchmedo auto-restart` around `cargo run`. It:
 
 Changes to `Cargo.toml` are not watched. Restart `invoke dev` after editing dependencies.
 
+> **Note:**
+>
+> Invoke is totally optional and only for convenience. It is totally fine to run `cargo run` directly and manually
+> restart when needed.
+
 ### Plain run
 
 ```sh
@@ -89,11 +94,11 @@ invoke --list
 
 Once the server is running:
 
-| What              | URL                                      |
-| ----------------- | ---------------------------------------- |
-| Swagger UI        | http://localhost:3000/docs               |
-| GET todo (stub)   | http://localhost:3000/api/todo           |
-| POST todo         | http://localhost:3000/api/todo           |
+| What            | URL                            |
+| --------------- | ------------------------------ |
+| Swagger UI      | http://localhost:3000/docs     |
+| GET todo (stub) | http://localhost:3000/api/todo |
+| POST todo       | http://localhost:3000/api/todo |
 
 `GET /api/todo` always returns `404` with `Todo item not found!`, as a placeholder for a real lookup. `POST /api/todo` logs the request body and returns `204`.
 
