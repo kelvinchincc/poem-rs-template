@@ -38,3 +38,48 @@ impl From<String> for ErrorResponse {
         }
     }
 }
+
+#[macro_export]
+macro_rules! api_response {
+    // Body, with description
+    ($(#[$meta:meta])* $vis:vis $name:ident, $status:tt, $data:ty, $desc:literal) => {
+        #[derive(::poem_openapi::ApiResponse)]
+        $(#[$meta])*
+        $vis enum $name {
+            #[doc = $desc]
+            #[oai(status = $status)]
+            Success($crate::types::responses::BaseResponseType<$data>),
+        }
+    };
+
+    // Body, no description
+    ($(#[$meta:meta])* $vis:vis $name:ident, $status:tt, $data:ty) => {
+        #[derive(::poem_openapi::ApiResponse)]
+        $(#[$meta])*
+        $vis enum $name {
+            #[oai(status = $status)]
+            Success($crate::types::responses::BaseResponseType<$data>),
+        }
+    };
+
+    // No body, with description
+    ($(#[$meta:meta])* $vis:vis $name:ident, $status:tt, $desc:literal) => {
+        #[derive(::poem_openapi::ApiResponse)]
+        $(#[$meta])*
+        $vis enum $name {
+            #[doc = $desc]
+            #[oai(status = $status)]
+            Success,
+        }
+    };
+
+    // No body, no description
+    ($(#[$meta:meta])* $vis:vis $name:ident, $status:tt) => {
+        #[derive(::poem_openapi::ApiResponse)]
+        $(#[$meta])*
+        $vis enum $name {
+            #[oai(status = $status)]
+            Success,
+        }
+    };
+}

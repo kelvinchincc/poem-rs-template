@@ -1,7 +1,5 @@
-use poem_openapi::{ApiResponse, Object};
+use poem_openapi::Object;
 use serde::{Deserialize, Serialize};
-
-use crate::types::responses::BaseResponseType;
 
 #[derive(Debug, Serialize, Deserialize, Object)]
 pub struct GetTodoResponse {
@@ -10,9 +8,4 @@ pub struct GetTodoResponse {
     pub completed: bool,
 }
 
-#[derive(ApiResponse)]
-pub enum GetTodoResponseType {
-    /// Success response with a list of todo items
-    #[oai(status = 200)]
-    Success(BaseResponseType<Vec<GetTodoResponse>>),
-}
+pub type GetTodoResponses = Vec<GetTodoResponse>;

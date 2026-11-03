@@ -3,12 +3,9 @@ use poem_openapi::{OpenApi, payload::Json, types::ToJSON};
 use tracing::info;
 
 use crate::{
-    api_errors,
+    api_errors, api_response,
     controller::ApiTag,
-    dto::{
-        get_todo_api::GetTodoResponseType,
-        post_todo_api::{PostTodoRequest, PostTodoResponseType},
-    },
+    dto::{get_todo_api::GetTodoResponses, post_todo_api::PostTodoRequest},
     error::service::ServiceError,
 };
 
@@ -35,3 +32,6 @@ impl TodoController {
 
 api_errors!(pub GetTodoError { NotFound = 404 => "Todo item not found!" });
 api_errors!(pub PostTodoError {});
+
+api_response!(pub GetTodoResponseType, 200, GetTodoResponses, "200 Ok");
+api_response!(pub PostTodoResponseType, 204, "Yes! It works!");
