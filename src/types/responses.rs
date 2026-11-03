@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 
 /// A generic response structure that can be used to wrap any type of data along with a message.
 #[derive(Debug, Serialize, Deserialize, Object)]
+#[allow(unused)]
 pub struct BaseResponse<T: Type + ParseFromJSON + ToJSON> {
     pub data: T,
     pub success: bool,
@@ -22,6 +23,7 @@ impl<T: Type + ParseFromJSON + ToJSON> From<T> for BaseResponse<T> {
 }
 
 /// Generic response type structure
+#[allow(unused)]
 pub type BaseResponseType<T> = Json<BaseResponse<T>>;
 
 /// Generic resposne structure for error responses.
