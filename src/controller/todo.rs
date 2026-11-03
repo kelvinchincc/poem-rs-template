@@ -1,3 +1,4 @@
+use color_eyre::Result;
 use poem_openapi::{OpenApi, payload::Json, types::ToJSON};
 use tracing::info;
 
