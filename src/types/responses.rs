@@ -1,4 +1,5 @@
 use poem_openapi::Object;
+use poem_openapi::payload::Json;
 use poem_openapi::types::{ParseFromJSON, ToJSON, Type};
 use serde::{Deserialize, Serialize};
 
@@ -6,26 +7,34 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize, Object)]
 pub struct BaseResponse<T: Type + ParseFromJSON + ToJSON> {
     pub data: T,
-    pub message: String,
+    pub success: bool,
 }
 
 impl<T: Type + ParseFromJSON + ToJSON> From<T> for BaseResponse<T> {
     fn from(data: T) -> Self {
         Self {
             data,
-            message: "Success".to_string(),
+            success: true,
         }
     }
 }
+
+/// Generic response type structure
+pub type BaseResponseType<T> = Json<BaseResponse<T>>;
 
 /// Generic resposne structure for error responses.
 #[derive(Debug, Serialize, Deserialize, Object)]
 pub struct ErrorResponse {
     pub message: String,
+    #[oai(default)]
+    pub success: bool,
 }
 
 impl From<String> for ErrorResponse {
     fn from(message: String) -> Self {
-        Self { message: message }
+        Self {
+            message: message,
+            success: false,
+        }
     }
 }
