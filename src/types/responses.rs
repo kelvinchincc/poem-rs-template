@@ -1,3 +1,5 @@
+use std::io::Error;
+
 use poem_openapi::Object;
 use poem_openapi::payload::Json;
 use poem_openapi::types::{ParseFromJSON, ToJSON, Type};
@@ -28,6 +30,15 @@ pub struct ErrorResponse {
     pub message: String,
     #[oai(default)]
     pub success: bool,
+}
+
+impl ErrorResponse {
+    pub fn internal_default() -> Self {
+        Self {
+            message: "Internal Server Error".to_string(),
+            success: false,
+        }
+    }
 }
 
 impl From<String> for ErrorResponse {

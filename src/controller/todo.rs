@@ -1,3 +1,4 @@
+// demo of using the template
 use color_eyre::Result;
 use poem_openapi::{OpenApi, payload::Json, types::ToJSON};
 use tracing::info;
@@ -26,7 +27,9 @@ impl TodoController {
         body: Json<PostTodoRequest>,
     ) -> Result<PostTodoResponseType, PostTodoError> {
         info!("body: {}", body.to_json().unwrap());
-        Ok(PostTodoResponseType::Success)
+
+        // Ok(PostTodoResponseType::Success)
+        Err(ServiceError::InternalServerError(Some("Simulated".into())).into())
     }
 }
 
