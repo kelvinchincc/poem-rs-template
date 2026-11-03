@@ -28,8 +28,8 @@ impl TodoController {
     ) -> Result<PostTodoResponseType, PostTodoError> {
         info!("body: {}", body.to_json().unwrap());
 
-        // Ok(PostTodoResponseType::Success)
-        Err(ServiceError::InternalServerError(Some("Simulated".into())).into())
+        // Err(ServiceError::InternalServerError(Some("Simulated".into())).into())
+        Ok(PostTodoResponseType::Success)
     }
 }
 
