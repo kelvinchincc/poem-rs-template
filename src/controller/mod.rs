@@ -1,3 +1,5 @@
+// __LICENSE__
+
 pub mod todo;
 
 use poem_openapi::Tags;

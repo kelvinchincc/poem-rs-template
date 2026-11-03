@@ -1,3 +1,5 @@
+// __LICENSE__
+
 use poem_openapi::Object;
 use poem_openapi::payload::Json;
 use poem_openapi::types::{ParseFromJSON, ToJSON, Type};

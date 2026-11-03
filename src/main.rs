@@ -1,3 +1,5 @@
+// __LICENSE__
+
 use color_eyre::Result;
 use poem_openapi::OpenApiService;
 

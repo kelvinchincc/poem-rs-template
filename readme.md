@@ -27,7 +27,7 @@ A starter template for building a REST API in Rust with [Poem](https://github.co
     │   └── service.rs  # ServiceError enum and the `api_errors!` macro
     └── types/          # Shared types used across modules
         ├── mod.rs
-        └── responses.rs # BaseResponse<T> (success) and ErrorResponse
+        └── responses.rs # BaseResponse<T>, ErrorResponse, and the api_response! macro
 ```
 
 How the pieces fit together:
@@ -36,7 +36,7 @@ How the pieces fit together:
 - **`controller/`** holds the endpoints. Each controller is an `impl` block annotated with `#[OpenApi]`.
 - **`dto/`** holds the structs that are serialized to and from JSON. They derive `Object` (for the request/response body) and `ApiResponse` (for the status codes).
 - **`error/`** defines `ServiceError`. The `api_errors!` macro generates an error enum for an endpoint and maps each `ServiceError` variant to an HTTP status. Anything unmapped becomes a `500`.
-- **`types/`** holds generic wrappers. `BaseResponse<T>` wraps success data with a message, and `ErrorResponse` wraps error messages.
+- **`types/`** holds generic wrappers. `BaseResponse<T>` wraps success data with a message, and `ErrorResponse` wraps error messages. The `api_response!` macro generates a success response enum for an endpoint, with the status code and optional body type and description.
 
 ## Prerequisites
 
@@ -200,10 +200,11 @@ Finally, update `API_TITLE`, `API_VERSION`, and `API_IP` in `src/main.rs` to mat
 1. Add request and response types in `src/dto/`, and register the module in `src/dto/mod.rs`.
 2. Add an `#[OpenApi]` impl in `src/controller/`, or add methods to an existing one.
 3. Declare the error variants with `api_errors!`, using a `ServiceError` variant name.
-4. Register the controller in `main.rs` if it is a new one.
+4. Declare the success response with `api_response!`, giving the status code and, if there is a body, the data type.
+5. Register the controller in `main.rs` if it is a new one.
 
 ## License
 
 This template is licensed under the [0BSD license](LICENSE). You can use, modify, and redistribute it without conditions.
 
-Change the license to suit your project. Update both the `LICENSE` file and the `license` field in `Cargo.toml`. If you are not sure which license to pick, [MPL-2.0](https://www.mozilla.org/MPL/2.0/) is a good default. It requires changes to MPL files to stay under MPL, but lets you keep your own new files under any license.
+Change the license to suit your project. Update both the `LICENSE` file and the `license` field in `Cargo.toml`. Then replace the `// __LICENSE__` line at the top of each file in `src/` with the license banner for your project. If you are not sure which license to pick, [MPL-2.0](https://www.mozilla.org/MPL/2.0/) is a good default. It requires changes to MPL files to stay under MPL, but lets you keep your own new files under any license.

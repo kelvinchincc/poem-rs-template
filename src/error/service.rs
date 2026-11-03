@@ -1,3 +1,5 @@
+// __LICENSE__
+
 #[derive(Debug, thiserror::Error)]
 pub enum ServiceError {
     #[error("Not Found: {0}")]
